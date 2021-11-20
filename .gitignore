@@ -103,3 +103,5 @@ ENV/
 # molecule
 roles/**/molecule/**/__pycache__/
 roles/**/molecule/**/*.conf
+
+.pass.txt
