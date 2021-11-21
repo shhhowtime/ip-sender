@@ -8,5 +8,7 @@ ansible-vault decrypt inventory/aws_ec2.yaml
 ansible-inventory -i inventory/aws_ec2.yaml --list > inventory/inventory.json
 #Building ansible inventory with hostnames and addresses
 python3 build_ec2_inventory.py
+#Remove ec2 plugin from ansible.cfg to launch kubespray
+sed -i "/enable_plugins = aws_ec2/d" ansible.cfg
 #Running kubespray on this inventory
 ansible-playbook -i inventory/stage/inventory.yaml --become --become-user=root cluster.yml
