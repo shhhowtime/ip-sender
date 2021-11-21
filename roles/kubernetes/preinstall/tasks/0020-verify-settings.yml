@@ -24,7 +24,7 @@
 
 - name: Stop if unknown OS
   assert:
-    that: ansible_distribution in ['RedHat', 'CentOS', 'Fedora', 'Ubuntu', 'Debian', 'Flatcar', 'Flatcar Container Linux by Kinvolk', 'Suse', 'openSUSE Leap', 'ClearLinux', 'OracleLinux', 'AlmaLinux', 'Amazon']
+    that: ansible_distribution in ['RedHat', 'CentOS', 'Fedora', 'Ubuntu', 'Debian', 'Flatcar', 'Flatcar Container Linux by Kinvolk', 'Suse', 'openSUSE Leap', 'ClearLinux', 'OracleLinux', 'AlmaLinux', 'Rocky', 'Amazon']
     msg: "{{ ansible_distribution }} is not a known OS"
   when: not ignore_assert_errors
 
@@ -53,16 +53,6 @@
       - "calico_version in calico_crds_archive_checksums.keys()"
     msg: "Calico version not supported {{ calico_version }} not in {{ calico_crds_archive_checksums.keys() }}"
   when:
-    - kube_network_plugin == 'calico'
-    - not ignore_assert_errors
-
-- name: Stop if kube-proxy is enabled when using eBPF dataplane
-  assert:
-    that:
-      - kube_proxy_remove
-    msg: "kube-proxy needs to be disabled when using Calico with eBPF dataplane"
-  when:
-    - calico_bpf_enabled | default(false)
     - kube_network_plugin == 'calico'
     - not ignore_assert_errors
 
@@ -183,8 +173,8 @@
 
 - name: check cloud_provider value
   assert:
-    that: cloud_provider in ['generic', 'gce', 'aws', 'azure', 'openstack', 'vsphere', 'oci', 'external']
-    msg: "If set the 'cloud_provider' var must be set either to 'generic', 'gce', 'aws', 'azure', 'openstack', 'vsphere', or external"
+    that: cloud_provider in ['gce', 'aws', 'azure', 'openstack', 'vsphere', 'oci', 'external']
+    msg: "If set the 'cloud_provider' var must be set either to 'gce', 'aws', 'azure', 'openstack', 'vsphere', 'oci' or 'external'"
   when:
     - cloud_provider is defined
     - not ignore_assert_errors

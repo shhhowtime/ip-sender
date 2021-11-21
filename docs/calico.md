@@ -295,7 +295,6 @@ To enable the eBPF dataplane support ensure you add the following to your invent
 
 ```yaml
 calico_bpf_enabled: true
-kube_proxy_remove: true
 ```
 
 **NOTE:** there is known incompatibility in using the `kernel-kvm` kernel package on Ubuntu OSes because it is missing support for `CONFIG_NET_SCHED` which is a requirement for Calico eBPF support. When using Calico eBPF with Ubuntu ensure you run the `-generic` kernel.
@@ -369,6 +368,7 @@ The following OSes will require enabling the EPEL repo in order to bring in wire
 
 * CentOS 7 & 8
 * AlmaLinux 8
+* Rocky Linux 8
 * Amazon Linux 2
 
 ```yaml

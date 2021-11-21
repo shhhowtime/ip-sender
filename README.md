@@ -57,10 +57,10 @@ A simple way to ensure you get all the correct version of Ansible is to use the 
 You will then need to use [bind mounts](https://docs.docker.com/storage/bind-mounts/) to get the inventory and ssh key into the container, like this:
 
 ```ShellSession
-docker pull quay.io/kubespray/kubespray:v2.17.0
+docker pull quay.io/kubespray/kubespray:v2.17.1
 docker run --rm -it --mount type=bind,source="$(pwd)"/inventory/sample,dst=/inventory \
   --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
-  quay.io/kubespray/kubespray:v2.17.0 bash
+  quay.io/kubespray/kubespray:v2.17.1 bash
 # Inside the container you may now run the kubespray playbooks:
 ansible-playbook -i /inventory/inventory.ini --private-key /root/.ssh/id_rsa cluster.yml
 ```
@@ -123,6 +123,7 @@ vagrant up
 - **openSUSE** Leap 15.x/Tumbleweed
 - **Oracle Linux** 7, [8](docs/centos8.md)
 - **Alma Linux** [8](docs/centos8.md)
+- **Rocky Linux** [8](docs/centos8.md)
 - **Amazon Linux 2** (experimental: see [amazon linux notes](docs/amazonlinux.md))
 
 Note: Upstart/SysV init based OS types are not supported.
@@ -130,7 +131,7 @@ Note: Upstart/SysV init based OS types are not supported.
 ## Supported Components
 
 - Core
-  - [kubernetes](https://github.com/kubernetes/kubernetes) v1.22.2
+  - [kubernetes](https://github.com/kubernetes/kubernetes) v1.22.3
   - [etcd](https://github.com/coreos/etcd) v3.5.0
   - [docker](https://www.docker.com/) v20.10 (see note)
   - [containerd](https://containerd.io/) v1.4.9
@@ -147,12 +148,11 @@ Note: Upstart/SysV init based OS types are not supported.
   - [ovn4nfv](https://github.com/opnfv/ovn4nfv-k8s-plugin) v1.1.0
   - [weave](https://github.com/weaveworks/weave) v2.8.1
 - Application
-  - [ambassador](https://github.com/datawire/ambassador): v1.5
   - [cephfs-provisioner](https://github.com/kubernetes-incubator/external-storage) v2.1.0-k8s1.11
   - [rbd-provisioner](https://github.com/kubernetes-incubator/external-storage) v2.1.1-k8s1.11
   - [cert-manager](https://github.com/jetstack/cert-manager) v1.5.4
   - [coredns](https://github.com/coredns/coredns) v1.8.0
-  - [ingress-nginx](https://github.com/kubernetes/ingress-nginx) v1.0.0
+  - [ingress-nginx](https://github.com/kubernetes/ingress-nginx) v1.0.4
 
 ## Container Runtime Notes
 
@@ -216,8 +216,6 @@ option to leverage built-in cloud provider networking instead.
 See also [Network checker](docs/netcheck.md).
 
 ## Ingress Plugins
-
-- [ambassador](docs/ambassador.md): the Ambassador Ingress Controller and API gateway.
 
 - [nginx](https://kubernetes.github.io/ingress-nginx): the NGINX Ingress Controller.
 
