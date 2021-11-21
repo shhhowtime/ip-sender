@@ -16,8 +16,8 @@ mas = json.loads(str)
 f.close()
 
 hosts = mas.get("tag_app_stage").get("hosts")
-masters = mas.get("tag_role_master").get("hosts")
-children = mas.get("tag_role_child").get("hosts")
+masters = mas.get("tag_role_master_stage").get("hosts")
+children = mas.get("tag_role_child_stage").get("hosts")
 
 hostnames = {}
 for i in range(len(hosts)):
