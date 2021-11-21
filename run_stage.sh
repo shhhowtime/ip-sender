@@ -2,6 +2,8 @@
 
 #Installing dependencies
 pip3 install -r requirements.txt
+#Decrypting inventory file for ec2
+ansible-vault decrypt inventory/aws_ec2.yaml
 #Getting active ec2 hosts
 ansible-inventory -i inventory/aws_ec2.yaml --list > inventory/inventory.json
 #Building ansible inventory with hostnames and addresses

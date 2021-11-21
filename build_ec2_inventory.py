@@ -23,7 +23,7 @@ hostnames = {}
 for i in range(len(hosts)):
     hostnames.update({hosts[i]: f"host{i+1}"})
 
-ffull_hosts=[]
+full_hosts=[]
 for host in hosts:
     full_hosts.append(f"{hostnames.get(host)}: {{ ansible_host: {host} }}")
 
