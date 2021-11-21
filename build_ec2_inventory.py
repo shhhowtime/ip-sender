@@ -25,7 +25,7 @@ for i in range(len(hosts)):
 
 full_hosts=[]
 for host in hosts:
-    full_hosts.append(f"{hostnames.get(host)}: {{ ansible_host: {host} }}")
+    full_hosts.append(f"{hostnames.get(host)}: {{ ansible_host: {host}, ansible_user: ubuntu }}")
 
 master_hosts = []
 for host in masters:
