@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-import json
+import json, sys
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+build_env = sys.argv[1]
 
 env = Environment(
     loader=FileSystemLoader('.'),
@@ -15,9 +17,9 @@ str = f.read()
 mas = json.loads(str)
 f.close()
 
-hosts = mas.get("tag_app_stage").get("hosts")
-masters = mas.get("tag_role_master_stage").get("hosts")
-children = mas.get("tag_role_child_stage").get("hosts")
+hosts = mas.get(f"tag_app_{build_env}").get("hosts")
+masters = mas.get(f"tag_role_master_{build_env}").get("hosts")
+children = mas.get(f"tag_role_child_{build_env}").get("hosts")
 
 hostnames = {}
 for i in range(len(hosts)):
@@ -41,6 +43,5 @@ playbook = template.render(
     child_host_list=child_hosts,
 )
 
-with open("inventory/stage/inventory.yaml", "w") as file:
+with open(f"inventory/{build_env}/inventory.yaml", "w") as file:
     file.write(playbook)
-

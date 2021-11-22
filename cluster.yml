@@ -1,4 +1,14 @@
 ---
+- name: Deploy docker config for registry repo
+  gather_facts: false
+  hosts: all
+  tasks:
+    - name: Create directory for config
+      file: path=/etc/docker state=directory
+
+    - name: Deploy docker daemon config
+      template: src=daemon.json dest=/etc/docker/daemon.json
+
 - name: Check ansible version
   import_playbook: ansible_version.yml
 
