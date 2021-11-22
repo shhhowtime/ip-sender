@@ -17,4 +17,4 @@ sed -i "/enable_plugins = aws_ec2/d" ansible.cfg
 #Set var with name of gitlab server
 GITLAB_HOSTNAME=`cat /etc/hostname`
 #Running kubespray on this inventory
-ansible-playbook -i inventory/stage/inventory.yaml -e gitlab_hostname=GITLAB_HOSTNAME --become --become-user=root cluster.yml
+ansible-playbook -i inventory/$1/inventory.yaml -e gitlab_hostname=GITLAB_HOSTNAME --become --become-user=root cluster.yml
