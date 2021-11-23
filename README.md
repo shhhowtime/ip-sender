@@ -1,3 +1,9 @@
+# Ипользование репозитория:
+
+`ENV=your env`, stage или prod
+`./deploy_kube_cluster.sh $ENV`
+В большинстве случаев использутеся автоматически при старте сервера с Gitlab.
+
 # Deploy a Production Ready Kubernetes Cluster
 
 ![Kubernetes Logo](https://raw.githubusercontent.com/kubernetes-sigs/kubespray/master/docs/img/kubernetes-logo.png)
